@@ -1,0 +1,31 @@
+Para depurar via wifi
+- Celular e PC precisam estar conectados na mesma rede
+- Conecta o celular por USB no PC com a depuração por USB ativada
+- No terminal do android studio rodar os comandos:
+ > adb tcpip 5555 - Isso faz o device ouvir a porta 5555
+
+- Pegar o ip do celular
+ > adb shell ip route
+
+- Desconecta o celular do PC 
+- Roda adb connect 
+ > adb connect <device-ip>:5555
+
+Para configurar o segundo device para depurar via wifi os passos são quase os mesmo.
+- Conecta o dispositivo por usb
+ > adb devices - Para obter o id dos dipositivos conectados
+ Exemplo de saido do terminal
+ > List of devices attached
+ > 0040697738      device
+ > 192.168.25.224:5555     device - esse vai ser o device conectado anteriormente
+- Agora vai especificar o device atraves do -s para setar a porta que vai ouvir
+ > adb -s 0040697738 tcpip 5555 - Pode ouvir a mesma porta não tem problema
+
+- Obter o ip do device
+ > adb -s 0040697738 shell ip route
+
+- Depois desconecta o cabo e roda o seguinte
+ > adb -s 0040697738 connect <device-ip>:5555
+
+
+https://stackoverflow.com/questions/4893953/run-install-debug-android-applications-over-wi-fi
